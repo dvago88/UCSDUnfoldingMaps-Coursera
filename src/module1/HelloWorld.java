@@ -57,7 +57,7 @@ public class HelloWorld extends PApplet {
         // Select a map provider
         AbstractMapProvider provider = new Google.GoogleTerrainProvider();
         // Set a zoom level
-        int zoomLevel = 10;
+        int zoomLevel = 11;
 
         if (offline) {
             // If you are working offline, you need to use this provider
@@ -74,7 +74,7 @@ public class HelloWorld extends PApplet {
         // The 6th argument specifies the map provider.
         // There are several providers built-in.
         // Note if you are working offline you must use the MBTilesMapProvider
-        map1 = new UnfoldingMap(this, 50, 50, 350, 500, provider);
+        map1 = new UnfoldingMap(this, 40, 50, 350, 500, provider);
 
         // The next line zooms in and centers the map at
         // 32.9 (latitude) and -117.2 (longitude)
@@ -83,17 +83,16 @@ public class HelloWorld extends PApplet {
         // This line makes the map interactive
         MapUtils.createDefaultEventDispatcher(this, map1);
 
-        // TODO: Add code here that creates map2
-        // Then you'll modify draw() below
-
+        map2 = new UnfoldingMap(this, 410, 50, 350, 500, provider);
+        map2.zoomAndPanTo(zoomLevel, new Location(6.26f, -75.57f));
+        MapUtils.createDefaultEventDispatcher(this, map2);
     }
 
     /**
      * Draw the Applet window.
      */
     public void draw() {
-        // So far we only draw map1...
-        // TODO: Add code so that both maps are displayed
         map1.draw();
+        map2.draw();
     }
 }
