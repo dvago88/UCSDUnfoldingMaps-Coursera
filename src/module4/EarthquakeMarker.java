@@ -22,8 +22,6 @@ public abstract class EarthquakeMarker extends SimplePointMarker {
     // You will want to set this in the constructor, either
     // using the thresholds below, or a continuous function
     // based on magnitude.
-
-
     /**
      * Greater than or equal to this threshold is a moderate earthquake
      */
@@ -44,10 +42,8 @@ public abstract class EarthquakeMarker extends SimplePointMarker {
 
     // ADD constants for colors
 
-
     // abstract method implemented in derived classes
     public abstract void drawEarthquake(PGraphics pg, float x, float y);
-
 
     // constructor
     public EarthquakeMarker(PointFeature feature) {
@@ -85,14 +81,19 @@ public abstract class EarthquakeMarker extends SimplePointMarker {
     // But this is up to you, of course.
     // You might find the getters below helpful.
     private void colorDetermine(PGraphics pg) {
-        //TODO: Implement this method
+        float magnitude = getMagnitude();
+        if (magnitude < THRESHOLD_INTERMEDIATE) {
+            pg.fill(255, 255, 0);
+        } else if (magnitude > THRESHOLD_INTERMEDIATE && magnitude < THRESHOLD_DEEP) {
+            pg.fill(0, 0, 255);
+        } else if (magnitude > THRESHOLD_DEEP) {
+            pg.fill(255, 0, 0);
+        }
+
     }
-
-	
 	/*
-	 * getters for earthquake properties
+     * getters for earthquake properties
 	 */
-
     public float getMagnitude() {
         return Float.parseFloat(getProperty("magnitude").toString());
     }
