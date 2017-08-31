@@ -23,7 +23,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="core.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/core.jar!/" />
@@ -32,7 +32,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="gluegen-rt.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/gluegen-rt.jar!/" />
@@ -41,7 +41,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="jogl-all.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/jogl-all.jar!/" />
@@ -53,7 +53,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="log4j-1.2.15.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/log4j-1.2.15.jar!/" />
@@ -62,7 +62,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="sqlite-jdbc-3.7.2.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/sqlite-jdbc-3.7.2.jar!/" />
@@ -71,7 +71,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="json4processing.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/json4processing.jar!/" />
@@ -80,7 +80,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="libTUIO.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/libTUIO.jar!/" />
@@ -89,13 +89,15 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="unfolding.0.9.7-uscd.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/unfolding.0.9.7-uscd.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/unfolding.0.9.7-uscd.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>
