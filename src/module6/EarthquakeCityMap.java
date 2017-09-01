@@ -69,6 +69,9 @@ public class EarthquakeCityMap extends PApplet {
     private CommonMarker lastSelected;
     private CommonMarker lastClicked;
 
+    private int state = 0;
+    private String result = "";
+
     public void setup() {
         // (1) Initializing canvas and map tiles
         size(900, 700, OPENGL);
@@ -88,7 +91,7 @@ public class EarthquakeCityMap extends PApplet {
 //        earthquakesURL = "test2.atom";
 
         // Uncomment this line to take the quiz
-        earthquakesURL = "quiz2.atom";
+//        earthquakesURL = "quiz2.atom";
 
 
         // (2) Reading in earthquake data and geometric properties
@@ -119,7 +122,7 @@ public class EarthquakeCityMap extends PApplet {
         }
 
         // could be used for debugging
-        printQuakes();
+//        printQuakes();
 
         // (3) Add markers to map
         //     NOTE: Country markers are not added to the map.  They are used
@@ -127,7 +130,7 @@ public class EarthquakeCityMap extends PApplet {
         map.addMarkers(quakeMarkers);
         map.addMarkers(cityMarkers);
 
-        sortAndPrint(10000);
+//        sortAndPrint(10000);
 
 
     }  // End setup
@@ -138,10 +141,73 @@ public class EarthquakeCityMap extends PApplet {
         map.draw();
         addKey();
 
+        textManager();
+
+    }
+
+    private void textManager() {
+        switch (state) {
+            case 0:
+                fill(255);
+                text("Enter the name fo the city", 25, 340);
+                fill(0);
+                text(result, 25, 360);
+                break;
+            case 1:
+                try {
+                    CityMarker cityMarker = findByName(result);
+                    for (Marker mhide : quakeMarkers) {
+                        EarthquakeMarker quakeMarker = (EarthquakeMarker) mhide;
+                        if (quakeMarker.getDistanceTo(cityMarker.getLocation())
+                                > quakeMarker.threatCircle()) {
+                            quakeMarker.setHidden(true);
+                        }
+                    }
+                    for (Marker mhide : cityMarkers) {
+                        if (mhide != cityMarker) {
+                            mhide.setHidden(true);
+                        }
+                    }
+
+                } catch (NullPointerException npe) {
+                    fill(255);
+                    text("No match \n", 25, 400);
+                } finally {
+                }
+                break;
+            case 2:
+                state = 0;
+                result = "";
+                unhideMarkers();
+                break;
+        }
+    }
+
+    private CityMarker findByName(String name) {
+        CityMarker[] ordenados = cityMarkers.toArray(new CityMarker[0]);
+        Arrays.sort(ordenados);
+        String realName = name.substring(1);
+
+        for (CityMarker ordenado : ordenados) {
+            if (ordenado.getCity().equals(realName)) {
+                return ordenado;
+            }
+        }
+        return null;
+    }
+
+    public void keyPressed() {
+        if (key == ENTER || key == RETURN) {
+            state++;
+        } else if (key == BACKSPACE) {
+            result = result.substring(0, result.length()-1);
+        } else {
+
+            result = result + key;
+        }
     }
 
 
-    // TODO: Add the method:
     private void sortAndPrint(int numToPrint) {
         if (numToPrint == 0) {
             return;
@@ -278,13 +344,14 @@ public class EarthquakeCityMap extends PApplet {
 
     // helper method to draw key in GUI
     private void addKey() {
-        // Remember you can use Processing's graphics methods here
         fill(255, 250, 240);
 
         int xbase = 25;
         int ybase = 50;
 
         rect(xbase, ybase, 150, 250);
+
+        rect(xbase, ybase + 300, 150, 30);
 
         fill(0);
         textAlign(LEFT, CENTER);
